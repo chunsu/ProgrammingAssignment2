@@ -12,20 +12,6 @@
         ## matrix_1 <- makeCacheMatrix(matrix(sample.int(100,36), nrow=6, ncol=6))
 
 
-        #check the input is a square matrix which can be inverted   
-        if ( !is.matrix(inputMatrix) ) {
-            stop( "argument inputMatrix is not a matrix" )
-        } 
-
-        if ( !nrow(inputMatrix) == ncol(inputMatrix) ) {
-            stop( "matrix inputMatrix is not a squre matrix" )
-        } 
-
-        if ( det(inputMatrix) == 0 ) {
-            stop( "a singular matrix cannot be inversed!" )
-        } 
-
-
         cachedInverseMatrix <- NULL
 
         # This assigns the input argument, IN, to the variable inputMatrix in the enclosing scope.
@@ -60,16 +46,6 @@
         ## cacheSolve(matrix_2) # This calculates and returns the inverse
         ## cacheSolve(matrix_2) # This returns the inverse from the cache
 
-
-
-        # Check matlib is installed and if so load it
-        ip <- as.list(installed.packages()[,'Package'])
-        if ( !any(ip == 'matlib') ) {
-            message("Error:please install matlib package")
-        } else {
-            library(matlib)
-        }
-
         ## Return a matrix that is the inverse of 'matrixCacher'    
         invertedMatrix <- matrixCacher$getInverse()
 
@@ -79,7 +55,7 @@
         }
 
         data <- matrixCacher$get()
-        invertedMatrix <- inv(data, ...)
+        invertedMatrix <- solve(data, ...)
         matrixCacher$setInverse(invertedMatrix)
 
 
